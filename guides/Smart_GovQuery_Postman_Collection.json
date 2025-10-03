@@ -1,0 +1,192 @@
+{
+  "info": {
+    "name": "GovQuery Smart NL2SQL API",
+    "description": "Collection for testing GovQuery Smart API with automatic Modal app deployment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check (Smart)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        },
+        "description": "Check API health and Modal app status with smart features"
+      },
+      "response": []
+    },
+    {
+      "name": "List All Schemas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/schemas",
+          "host": ["{{base_url}}"],
+          "path": ["schemas"]
+        },
+        "description": "Get a list of all available database schemas"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Specific Schema",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/schema/{{table_code}}",
+          "host": ["{{base_url}}"],
+          "path": ["schema", "{{table_code}}"]
+        },
+        "description": "Get detailed information about a specific schema"
+      },
+      "response": []
+    },
+    {
+      "name": "Smart Query - Population (Auto-Deploy)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What is the total population in Texas?\",\n  \"table_codes\": [\"B01001\"],\n  \"model_choice\": \"auto\",\n  \"max_tokens\": 512,\n  \"temperature\": 0.1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query",
+          "host": ["{{base_url}}"],
+          "path": ["query"]
+        },
+        "description": "Smart query with automatic Modal app deployment if needed"
+      },
+      "response": []
+    },
+    {
+      "name": "Smart Query - Income (Auto-Deploy)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What is the median household income in California?\",\n  \"table_codes\": [\"B19013\"],\n  \"model_choice\": \"t5\",\n  \"max_tokens\": 512,\n  \"temperature\": 0.1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query",
+          "host": ["{{base_url}}"],
+          "path": ["query"]
+        },
+        "description": "Smart query for income data with T5 model and auto-deployment"
+      },
+      "response": []
+    },
+    {
+      "name": "Smart Query - Education (Auto-Deploy)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"How many people have a bachelor's degree in New York?\",\n  \"table_codes\": [\"B15003\"],\n  \"model_choice\": \"sqlcoder\",\n  \"max_tokens\": 512,\n  \"temperature\": 0.1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query",
+          "host": ["{{base_url}}"],
+          "path": ["query"]
+        },
+        "description": "Smart query for education data with SQLCoder model and auto-deployment"
+      },
+      "response": []
+    },
+    {
+      "name": "Simple Query - Population (Fallback)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What is the total population in Texas?\",\n  \"table_codes\": [\"B01001\"],\n  \"model_choice\": \"auto\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query/simple",
+          "host": ["{{base_url}}"],
+          "path": ["query", "simple"]
+        },
+        "description": "Simple query endpoint with automatic fallback handling"
+      },
+      "response": []
+    },
+    {
+      "name": "Simple Query - Employment (Fallback)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What is the unemployment rate in Florida?\",\n  \"table_codes\": [\"B23025\"],\n  \"model_choice\": \"auto\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query/simple",
+          "host": ["{{base_url}}"],
+          "path": ["query", "simple"]
+        },
+        "description": "Simple query for employment data with fallback"
+      },
+      "response": []
+    },
+    {
+      "name": "Manual Deploy Modal App",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/deploy",
+          "host": ["{{base_url}}"],
+          "path": ["deploy"]
+        },
+        "description": "Manually trigger Modal app deployment without making a query"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "description": "Base URL for the GovQuery Smart API"
+    },
+    {
+      "key": "table_code",
+      "value": "B01001",
+      "description": "Example table code for schema requests"
+    }
+  ]
+}
