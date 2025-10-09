@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovQuery - Natural Language to SQL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        .control-group select, .control-group input {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .control-group input[type="number"] {
+            width: 100px;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px 30px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.assistant {
+            text-align: left;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.assistant .message-bubble {
+            background: white;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .message-content {
+            margin-bottom: 10px;
+        }
+
+        .sql-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .sql-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .sql-header h4 {
+            color: #495057;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+        }
+
+        .sql-code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .data-table {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #6c757d;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .input-container {
+            padding: 20px 30px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 1px solid #ced4da;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-container input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .meta-info {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 10px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-ok {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #6c757d;
+            padding: 40px;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ GovQuery</h1>
+            <p>Ask questions about government data in natural language</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="modelSelect">Model</label>
+                <select id="modelSelect">
+                    <option value="AUTO">AUTO</option>
+                    <option value="T5">T5</option>
+                    <option value="SQLCODER">SQLCODER</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="tableSelect">Tables</label>
+                <select id="tableSelect" multiple>
+                    <option value="B01001">B01001 - Age and Sex</option>
+                    <option value="B02001">B02001 - Race</option>
+                    <option value="B14001">B14001 - School Enrollment</option>
+                    <option value="B19001">B19001 - Household Income</option>
+                    <option value="B23025">B23025 - Employment Status</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="maxRows">Max Rows</label>
+                <input type="number" id="maxRows" value="100" min="1" max="5000">
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="empty-state">
+                    <h3>👋 Welcome to GovQuery!</h3>
+                    <p>Ask me anything about government data. Try: "What is the total population in Texas?"</p>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <input type="text" id="messageInput" placeholder="Ask a question about government data..." 
+                       onkeypress="handleKeyPress(event)">
+                <button id="sendBtn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let isLoading = false;
+
+        // Load available schemas on page load
+        async function loadSchemas() {
+            try {
+                const response = await fetch(`${API_BASE}/schemas`);
+                const schemas = await response.json();
+                
+                const tableSelect = document.getElementById('tableSelect');
+                tableSelect.innerHTML = '';
+                
+                schemas.forEach(schema => {
+                    const option = document.createElement('option');
+                    option.value = schema.table_code;
+                    option.textContent = `${schema.table_code} - ${schema.table_name}`;
+                    tableSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Failed to load schemas:', error);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !isLoading) {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message || isLoading) return;
+
+            // Clear input and disable
+            input.value = '';
+            setLoading(true);
+
+            // Add user message
+            addMessage(message, 'user');
+
+            try {
+                // Get selected tables
+                const tableSelect = document.getElementById('tableSelect');
+                const selectedTables = Array.from(tableSelect.selectedOptions).map(opt => opt.value);
+                
+                // Prepare request
+                const request = {
+                    question: message,
+                    model_hint: document.getElementById('modelSelect').value,
+                    tables: selectedTables.length > 0 ? selectedTables : null,
+                    max_rows: parseInt(document.getElementById('maxRows').value)
+                };
+
+                // Make API call
+                const response = await fetch(`${API_BASE}/query`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(request)
+                });
+
+                const data = await response.json();
+
+                if (data.status === 'ok') {
+                    // Show successful response
+                    showResponse(data);
+                } else {
+                    // Show error
+                    showError(data);
+                }
+
+            } catch (error) {
+                console.error('API Error:', error);
+                showError({
+                    status: 'error',
+                    message: `Network error: ${error.message}`,
+                    error_code: 'NETWORK_ERROR'
+                });
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function addMessage(content, type) {
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            // Remove empty state if present
+            const emptyState = messagesContainer.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = content;
+
+            bubbleDiv.appendChild(contentDiv);
+            messageDiv.appendChild(bubbleDiv);
+            messagesContainer.appendChild(messageDiv);
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showResponse(data) {
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant';
+
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+
+            // Answer text
+            const answerDiv = document.createElement('div');
+            answerDiv.className = 'message-content';
+            answerDiv.textContent = data.meta?.explanation || 'Here\'s the SQL query and results:';
+            bubbleDiv.appendChild(answerDiv);
+
+            // SQL section
+            if (data.sql) {
+                const sqlSection = document.createElement('div');
+                sqlSection.className = 'sql-section';
+                
+                const sqlHeader = document.createElement('div');
+                sqlHeader.className = 'sql-header';
+                sqlHeader.innerHTML = `
+                    <h4>Generated SQL</h4>
+                    <button class="copy-btn" onclick="copyToClipboard('${data.sql.replace(/'/g, "\\'")}')">Copy</button>
+                `;
+                
+                const sqlCode = document.createElement('div');
+                sqlCode.className = 'sql-code';
+                sqlCode.textContent = data.sql;
+                
+                sqlSection.appendChild(sqlHeader);
+                sqlSection.appendChild(sqlCode);
+                bubbleDiv.appendChild(sqlSection);
+            }
+
+            // Data table (placeholder for now)
+            if (data.data && data.data.length > 0) {
+                const dataTable = createDataTable(data.data);
+                bubbleDiv.appendChild(dataTable);
+            } else {
+                const noDataDiv = document.createElement('div');
+                noDataDiv.className = 'data-table';
+                noDataDiv.innerHTML = '<div style="padding: 20px; text-align: center; color: #6c757d;">No data returned. The SQL query was generated but not executed.</div>';
+                bubbleDiv.appendChild(noDataDiv);
+            }
+
+            // Meta information
+            if (data.meta) {
+                const metaDiv = document.createElement('div');
+                metaDiv.className = 'meta-info';
+                
+                const statusBadge = document.createElement('span');
+                statusBadge.className = `status-badge status-${data.status}`;
+                statusBadge.textContent = data.status;
+                
+                const modelInfo = document.createElement('span');
+                modelInfo.className = 'meta-item';
+                modelInfo.innerHTML = `🤖 <span>Model: ${data.meta.model || 'unknown'}</span>`;
+                
+                const timeInfo = document.createElement('span');
+                timeInfo.className = 'meta-item';
+                timeInfo.innerHTML = `⏱️ <span>${data.meta.elapsed_ms || 0}ms</span>`;
+                
+                metaDiv.appendChild(statusBadge);
+                metaDiv.appendChild(modelInfo);
+                metaDiv.appendChild(timeInfo);
+                bubbleDiv.appendChild(metaDiv);
+            }
+
+            messageDiv.appendChild(bubbleDiv);
+            messagesContainer.appendChild(messageDiv);
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showError(data) {
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant';
+
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `
+                <strong>Error: ${data.error_code || 'UNKNOWN'}</strong><br>
+                ${data.message || 'An unknown error occurred'}
+            `;
+
+            bubbleDiv.appendChild(errorDiv);
+            messageDiv.appendChild(bubbleDiv);
+            messagesContainer.appendChild(messageDiv);
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function createDataTable(data) {
+            if (!data || data.length === 0) return null;
+
+            const tableDiv = document.createElement('div');
+            tableDiv.className = 'data-table';
+
+            const table = document.createElement('table');
+            
+            // Create header
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            const columns = Object.keys(data[0]);
+            
+            columns.forEach(col => {
+                const th = document.createElement('th');
+                th.textContent = col;
+                headerRow.appendChild(th);
+            });
+            
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create body
+            const tbody = document.createElement('tbody');
+            data.slice(0, 25).forEach(row => { // Limit to 25 rows
+                const tr = document.createElement('tr');
+                columns.forEach(col => {
+                    const td = document.createElement('td');
+                    td.textContent = row[col] || '';
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            
+            table.appendChild(tbody);
+            tableDiv.appendChild(table);
+
+            return tableDiv;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#28a745';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function setLoading(loading) {
+            isLoading = loading;
+            const sendBtn = document.getElementById('sendBtn');
+            const input = document.getElementById('messageInput');
+            
+            if (loading) {
+                sendBtn.disabled = true;
+                sendBtn.textContent = 'Sending...';
+                input.disabled = true;
+            } else {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send';
+                input.disabled = false;
+                input.focus();
+            }
+        }
+
+        // Load schemas on page load
+        document.addEventListener('DOMContentLoaded', loadSchemas);
+    </script>
+</body>
+</html>
