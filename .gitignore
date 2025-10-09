@@ -385,3 +385,5 @@ tramp
 # Local configuration overrides
 local_settings.py
 local_config.py
+
+postgres*
