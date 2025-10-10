@@ -14,3 +14,6 @@ rapidfuzz>=3.9.6
 
 # Additional dependencies for templated API
 requests>=2.31.0
+
+# SQL parsing and validation
+sqlglot>=24.0.0

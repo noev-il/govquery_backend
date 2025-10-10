@@ -19,6 +19,26 @@ sys.path.insert(0, str(project_root))
 
 from smart_modal_client import get_smart_client, NL2SQLRequest, NL2SQLResponse
 
+# SQLGlot for SQL parsing
+try:
+    from sqlglot import parse_one, format
+    SQLGLOT_AVAILABLE = True
+except ImportError:
+    SQLGLOT_AVAILABLE = False
+
+# Performance optimizations
+try:
+    from performance_optimizations import (
+        get_schema_with_ttl, 
+        preload_common_schemas, 
+        time_function,
+        perf_monitor,
+        get_cache_stats
+    )
+    PERFORMANCE_OPTIMIZATIONS = True
+except ImportError:
+    PERFORMANCE_OPTIMIZATIONS = False
+
 
 # FastAPI app
 app = FastAPI(
@@ -67,6 +87,19 @@ class SchemaInfo(BaseModel):
     columns: List[dict]
 
 
+class SQLParseRequest(BaseModel):
+    """Request model for SQL parsing."""
+    sql: str
+
+
+class SQLParseResponse(BaseModel):
+    """Response model for SQL parsing."""
+    valid: bool
+    ast: Optional[dict] = None
+    error: Optional[str] = None
+    formatted_sql: Optional[str] = None
+
+
 @app.get("/")
 async def root():
     """Root endpoint with API information."""
@@ -84,14 +117,16 @@ async def root():
             "schemas": "/schemas - List available schemas",
             "schema": "/schema/{table_code} - Get specific schema",
             "health": "/health - Health check with app status",
-            "deploy": "/deploy - Manually trigger app deployment"
+            "deploy": "/deploy - Manually trigger app deployment",
+            "parse_sql": "/parse-sql - Parse and validate SQL using SQLGlot"
         }
     }
 
 
 @app.get("/health")
+@time_function
 async def health_check():
-    """Enhanced health check with Modal app status."""
+    """Enhanced health check with Modal app status and performance metrics."""
     try:
         client = get_smart_client()
         schemas = client.load_all_schemas()
@@ -99,7 +134,8 @@ async def health_check():
         # Check Modal app status
         app_running = client._is_app_running()
         
-        return {
+        # Add performance metrics if available
+        health_data = {
             "status": "healthy",
             "schemas_loaded": len(schemas),
             "modal_app_running": app_running,
@@ -112,6 +148,14 @@ async def health_check():
                 "auto_stop": "Modal built-in timeout (5 minutes)"
             }
         }
+        
+        if PERFORMANCE_OPTIMIZATIONS:
+            health_data["performance"] = {
+                "cache_stats": get_cache_stats(),
+                "performance_stats": perf_monitor.get_stats()
+            }
+        
+        return health_data
     except Exception as e:
         return {
             "status": "unhealthy",
@@ -266,6 +310,53 @@ def deploy_modal_app():
         raise HTTPException(status_code=500, detail=f"Deployment error: {str(e)}")
 
 
+@app.post("/parse-sql", response_model=SQLParseResponse)
+def parse_sql(request: SQLParseRequest):
+    """
+    Parse and validate SQL using SQLGlot.
+    
+    This endpoint uses SQLGlot to parse SQL queries and provide
+    syntax validation, formatting, and AST generation.
+    """
+    if not SQLGLOT_AVAILABLE:
+        return SQLParseResponse(
+            valid=False,
+            error="SQLGlot is not available. Please install with: pip install sqlglot"
+        )
+    
+    try:
+        # Parse the SQL
+        parsed = parse_one(request.sql)
+        
+        if parsed is None:
+            return SQLParseResponse(
+                valid=False,
+                error="Failed to parse SQL query"
+            )
+        
+        # Format the SQL
+        formatted = format(parsed, pretty=True)
+        
+        # Convert AST to dictionary (simplified)
+        ast_dict = {
+            "type": str(parsed.key),
+            "expressions": len(parsed.expressions) if hasattr(parsed, 'expressions') else 0,
+            "sql": request.sql
+        }
+        
+        return SQLParseResponse(
+            valid=True,
+            ast=ast_dict,
+            formatted_sql=formatted
+        )
+        
+    except Exception as e:
+        return SQLParseResponse(
+            valid=False,
+            error=f"SQL parsing error: {str(e)}"
+        )
+
+
 if __name__ == "__main__":
     # Set up environment variables
     os.environ["MODAL_TOKEN_ID"] = "ak-82ssY3sBr9rB9tau63rD2n"
@@ -278,6 +369,15 @@ if __name__ == "__main__":
     print("📖 API Docs: http://localhost:8000/docs")
     print("🔍 Health: http://localhost:8000/health")
     print("🚀 Features: Auto-deployment, Cold start fallback")
+    
+    # Preload common schemas for better performance
+    if PERFORMANCE_OPTIMIZATIONS:
+        print("⚡ Preloading common schemas...")
+        preload_common_schemas()
+        print("✅ Schema preloading complete")
+    else:
+        print("⚠️ Performance optimizations not available")
+    
     print("💡 Press Ctrl+C to stop")
     print("=" * 50)
     
