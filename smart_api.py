@@ -358,9 +358,10 @@ def parse_sql(request: SQLParseRequest):
 
 
 if __name__ == "__main__":
-    # Set up environment variables
-    os.environ["MODAL_TOKEN_ID"] = "ak-82ssY3sBr9rB9tau63rD2n"
-    os.environ["MODAL_TOKEN_SECRET"] = "as-A4L7Xzb33dybZ9XEhheVAV"
+    # Modal credentials should be set via environment variables
+    # Set these before running: export MODAL_TOKEN_ID="your-id" MODAL_TOKEN_SECRET="your-secret"
+    if not os.environ.get("MODAL_TOKEN_ID") or not os.environ.get("MODAL_TOKEN_SECRET"):
+        raise ValueError("MODAL_TOKEN_ID and MODAL_TOKEN_SECRET must be set as environment variables")
     os.environ["MODAL_APP_NAME"] = "govquery-nl2sql-main"
     
     print("🎯 GovQuery Smart API Server")

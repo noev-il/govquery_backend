@@ -12,8 +12,10 @@ from datetime import datetime
 from typing import List, Dict, Any
 
 # Set up Modal authentication
-os.environ["MODAL_TOKEN_ID"] = "ak-82ssY3sBr9rB9tau63rD2n"
-os.environ["MODAL_TOKEN_SECRET"] = "as-A4L7Xzb33dybZ9XEhheVAV"
+# Modal credentials should be set via environment variables
+# Set these before running: export MODAL_TOKEN_ID="your-id" MODAL_TOKEN_SECRET="your-secret"
+if not os.environ.get("MODAL_TOKEN_ID") or not os.environ.get("MODAL_TOKEN_SECRET"):
+    raise ValueError("MODAL_TOKEN_ID and MODAL_TOKEN_SECRET must be set as environment variables")
 
 # Test question sets
 TEST_QUESTIONS = {

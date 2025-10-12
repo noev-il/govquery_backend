@@ -43,8 +43,9 @@ def create_env_file():
     print("\n📝 Creating .env file...")
     
     env_content = """# GovQuery Environment Variables
-MODAL_TOKEN_ID=ak-82ssY3sBr9rB9tau63rD2n
-MODAL_TOKEN_SECRET=as-A4L7Xzb33dybZ9XEhheVAV
+# Replace with your actual Modal credentials
+MODAL_TOKEN_ID=your-modal-token-id
+MODAL_TOKEN_SECRET=your-modal-token-secret
 MODAL_APP_NAME=govquery-nl2sql-main
 
 # Optional: Override default values
