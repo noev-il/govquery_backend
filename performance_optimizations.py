@@ -159,7 +159,10 @@ if __name__ == "__main__":
     
     print(f"📊 First load: {first_load:.3f}s")
     print(f"📊 Cached load: {cached_load:.3f}s")
-    print(f"📊 Speedup: {first_load/cached_load:.1f}x")
+    if cached_load > 0:
+        print(f"📊 Speedup: {first_load/cached_load:.1f}x")
+    else:
+        print("📊 Speedup: N/A (cached load too fast to measure)")
     
     # Show cache stats
     print(f"📈 Cache stats: {get_cache_stats()}")

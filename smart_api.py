@@ -7,6 +7,7 @@ import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
@@ -18,6 +19,7 @@ project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
 from smart_modal_client import get_smart_client, NL2SQLRequest, NL2SQLResponse
+from core.db_executor import DatabaseExecutor
 
 # SQLGlot for SQL parsing
 try:
@@ -40,21 +42,45 @@ except ImportError:
     PERFORMANCE_OPTIMIZATIONS = False
 
 
-# FastAPI app
-app = FastAPI(
-    title="GovQuery Smart NL2SQL API",
-    description="Natural Language to SQL conversion with automatic Modal app deployment",
-    version="2.0.0"
-)
+# Initialize database executor
+db_executor = None
 
-# CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan manager for database connection."""
+    global db_executor
+    
+    # Startup: Initialize database connection
+    try:
+        database_url = os.getenv("DATABASE_URL")
+        if not database_url:
+            # Fallback to individual components
+            host = os.getenv("POSTGRES_HOST", "localhost")
+            port = os.getenv("POSTGRES_PORT", "5432")
+            db = os.getenv("POSTGRES_DB", "census_data")
+            user = os.getenv("POSTGRES_USER", "govquery")
+            password = os.getenv("POSTGRES_PASSWORD", "govquery_dev")
+            database_url = f"postgresql://{user}:{password}@{host}:{port}/{db}"
+        
+        db_executor = DatabaseExecutor(database_url)
+        await db_executor.connect()
+        
+        # Test connection
+        if await db_executor.test_connection():
+            print("✅ Database connection established")
+        else:
+            print("⚠️ Database connection test failed")
+            
+    except Exception as e:
+        print(f"❌ Failed to initialize database: {e}")
+        db_executor = None
+    
+    yield
+    
+    # Shutdown: Close database connection
+    if db_executor:
+        await db_executor.close()
+        print("🔌 Database connection closed")
 
 
 class QueryRequest(BaseModel):
@@ -100,6 +126,44 @@ class SQLParseResponse(BaseModel):
     formatted_sql: Optional[str] = None
 
 
+class ExecuteRequest(BaseModel):
+    """Request model for SQL execution."""
+    sql: str
+    max_rows: Optional[int] = 1000
+
+
+class ExecuteResponse(BaseModel):
+    """Response model for SQL execution."""
+    success: bool
+    rows: List[Dict[str, Any]]
+    row_count: int
+    columns: List[str]
+    execution_time_ms: float
+    error: Optional[str] = None
+    applied_limit: bool
+    statement_timeout_ms: int
+    query_id: Optional[str] = None
+    query_metadata: Optional[Dict[str, Any]] = None
+
+
+# Create FastAPI app with lifespan
+app = FastAPI(
+    title="GovQuery Smart NL2SQL API",
+    description="Natural Language to SQL conversion with automatic Modal app deployment",
+    version="2.0.0",
+    lifespan=lifespan
+)
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 @app.get("/")
 async def root():
     """Root endpoint with API information."""
@@ -124,23 +188,38 @@ async def root():
 
 
 @app.get("/health")
-@time_function
 async def health_check():
-    """Enhanced health check with Modal app status and performance metrics."""
+    """Enhanced health check with database and Modal app status."""
     try:
-        client = get_smart_client()
-        schemas = client.load_all_schemas()
+        # Check database connectivity
+        db_ok = False
+        if db_executor:
+            try:
+                db_ok = await db_executor.test_connection()
+            except Exception:
+                db_ok = False
         
-        # Check Modal app status
-        app_running = client._is_app_running()
+        # Check Modal client (without calling functions to avoid cold start issues)
+        modal_ok = False
+        modal_app_name = "unknown"
+        try:
+            client = get_smart_client()
+            modal_app_name = client.app_name
+            modal_ok = True  # Assume OK if client can be created
+        except Exception:
+            modal_ok = False
         
-        # Add performance metrics if available
+        # Get schema count from filesystem
+        schemas_dir = project_root / "schemas"
+        schemas = [f for f in schemas_dir.iterdir() if f.suffix == ".json"]
+        
+        # Build health response
         health_data = {
-            "status": "healthy",
+            "status": "healthy" if db_ok else "degraded",
+            "db_ok": db_ok,
+            "modal_ok": modal_ok,
             "schemas_loaded": len(schemas),
-            "modal_app_running": app_running,
-            "modal_app_name": client.app_name,
-            "deployment_attempted": client.deployment_attempted,
+            "modal_app_name": modal_app_name,
             "features": {
                 "auto_deployment": True,
                 "cold_start_fallback": True,
@@ -159,8 +238,9 @@ async def health_check():
     except Exception as e:
         return {
             "status": "unhealthy",
-            "error": str(e),
-            "modal_app_running": False
+            "db_ok": False,
+            "modal_ok": False,
+            "error": str(e)
         }
 
 
@@ -355,6 +435,77 @@ def parse_sql(request: SQLParseRequest):
             valid=False,
             error=f"SQL parsing error: {str(e)}"
         )
+
+
+@app.post("/execute", response_model=ExecuteResponse)
+async def execute_sql(request: ExecuteRequest):
+    """
+    Execute SQL query against Census database.
+    
+    This endpoint executes validated SQL queries with comprehensive safety checks:
+    - SELECT-only enforcement
+    - Row limit enforcement (max 1,000)
+    - Query timeout (30 seconds)
+    - SQL injection protection
+    - Function call validation
+    """
+    if db_executor is None:
+        raise HTTPException(
+            status_code=503, 
+            detail="Database not available. Please ensure PostgreSQL is running and configured."
+        )
+    
+    try:
+        result = await db_executor.execute_query(
+            sql=request.sql,
+            max_rows=request.max_rows
+        )
+        
+        return ExecuteResponse(**result)
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Database execution error: {str(e)}"
+        )
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan manager for database connection."""
+    global db_executor
+    
+    # Startup: Initialize database connection
+    try:
+        database_url = os.getenv("DATABASE_URL")
+        if not database_url:
+            # Fallback to individual components
+            host = os.getenv("POSTGRES_HOST", "localhost")
+            port = os.getenv("POSTGRES_PORT", "5432")
+            db = os.getenv("POSTGRES_DB", "census_data")
+            user = os.getenv("POSTGRES_USER", "govquery")
+            password = os.getenv("POSTGRES_PASSWORD", "govquery_dev")
+            database_url = f"postgresql://{user}:{password}@{host}:{port}/{db}"
+        
+        db_executor = DatabaseExecutor(database_url)
+        await db_executor.connect()
+        
+        # Test connection
+        if await db_executor.test_connection():
+            print("✅ Database connection established")
+        else:
+            print("⚠️ Database connection test failed")
+            
+    except Exception as e:
+        print(f"❌ Failed to initialize database: {e}")
+        db_executor = None
+    
+    yield
+    
+    # Shutdown: Close database connection
+    if db_executor:
+        await db_executor.close()
+        print("🔌 Database connection closed")
 
 
 if __name__ == "__main__":

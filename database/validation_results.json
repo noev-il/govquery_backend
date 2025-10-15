@@ -1,0 +1,2426 @@
+{
+  "database_tables": [
+    "b01001",
+    "b02001",
+    "b14001",
+    "b14002",
+    "b15003",
+    "b19001",
+    "b19013",
+    "b20005",
+    "b23006",
+    "b23025",
+    "b24010",
+    "dp02",
+    "profile_info_2010"
+  ],
+  "expected_tables": [
+    "b23006",
+    "b01001",
+    "dp02",
+    "b19001",
+    "b23025",
+    "b14002",
+    "b14001",
+    "b20005",
+    "b24010",
+    "b02001",
+    "b19013",
+    "b15003"
+  ],
+  "missing_tables": [],
+  "extra_tables": [
+    "profile_info_2010"
+  ],
+  "table_validations": {
+    "b23006": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 34,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_employed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_unemployed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_not_in_labor_force",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_employed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_unemployed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_not_in_labor_force",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_employed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_unemployed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_not_in_labor_force",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_employed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_unemployed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_not_in_labor_force",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_employed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_unemployed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "less_than_high_school_not_in_labor_force_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_employed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_unemployed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_not_in_labor_force_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_employed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_unemployed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_not_in_labor_force_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_employed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_unemployed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_or_higher_not_in_labor_force_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "less_than_high_school_total": 100,
+          "less_than_high_school_employed": 60,
+          "less_than_high_school_unemployed": 10,
+          "less_than_high_school_not_in_labor_force": 30,
+          "high_school_total": 200,
+          "high_school_employed": 120,
+          "high_school_unemployed": 20,
+          "high_school_not_in_labor_force": 60,
+          "some_college_total": 300,
+          "some_college_employed": 200,
+          "some_college_unemployed": 30,
+          "some_college_not_in_labor_force": 70,
+          "bachelors_or_higher_total": 400,
+          "bachelors_or_higher_employed": 300,
+          "bachelors_or_higher_unemployed": 20,
+          "bachelors_or_higher_not_in_labor_force": 80,
+          "less_than_high_school_total_moe": 5,
+          "less_than_high_school_employed_moe": 3,
+          "less_than_high_school_unemployed_moe": 2,
+          "less_than_high_school_not_in_labor_force_moe": 3,
+          "high_school_total_moe": 7,
+          "high_school_employed_moe": 5,
+          "high_school_unemployed_moe": 2,
+          "high_school_not_in_labor_force_moe": 4,
+          "some_college_total_moe": 9,
+          "some_college_employed_moe": 7,
+          "some_college_unemployed_moe": 3,
+          "some_college_not_in_labor_force_moe": 5,
+          "bachelors_or_higher_total_moe": 10,
+          "bachelors_or_higher_employed_moe": 8,
+          "bachelors_or_higher_unemployed_moe": 2,
+          "bachelors_or_higher_not_in_labor_force_moe": 4
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "less_than_high_school_total",
+          "less_than_high_school_employed",
+          "less_than_high_school_unemployed",
+          "less_than_high_school_not_in_labor_force",
+          "high_school_total",
+          "high_school_employed",
+          "high_school_unemployed",
+          "high_school_not_in_labor_force",
+          "some_college_total",
+          "some_college_employed",
+          "some_college_unemployed",
+          "some_college_not_in_labor_force",
+          "bachelors_or_higher_total",
+          "bachelors_or_higher_employed",
+          "bachelors_or_higher_unemployed",
+          "bachelors_or_higher_not_in_labor_force",
+          "less_than_high_school_total_moe",
+          "less_than_high_school_employed_moe",
+          "less_than_high_school_unemployed_moe",
+          "less_than_high_school_not_in_labor_force_moe",
+          "high_school_total_moe",
+          "high_school_employed_moe",
+          "high_school_unemployed_moe",
+          "high_school_not_in_labor_force_moe",
+          "some_college_total_moe",
+          "some_college_employed_moe",
+          "some_college_unemployed_moe",
+          "some_college_not_in_labor_force_moe",
+          "bachelors_or_higher_total_moe",
+          "bachelors_or_higher_employed_moe",
+          "bachelors_or_higher_unemployed_moe",
+          "bachelors_or_higher_not_in_labor_force_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b01001": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 9,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_population",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_population",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "population_under_18",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "population_18_to_64",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "population_65_and_over",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "total_population": 1500,
+          "total_population_moe": 20,
+          "male_population": 750,
+          "female_population": 750,
+          "population_under_18": 400,
+          "population_18_to_64": 900,
+          "population_65_and_over": 200
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "total_population",
+          "total_population_moe",
+          "male_population",
+          "female_population",
+          "population_under_18",
+          "population_18_to_64",
+          "population_65_and_over"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "dp02": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 8,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_graduate_or_higher",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_graduate_or_higher_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_degree_or_higher",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_degree_or_higher_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "civilian_population_18_over",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "civilian_veterans",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "high_school_graduate_or_higher": 800,
+          "high_school_graduate_or_higher_moe": 50,
+          "bachelors_degree_or_higher": 300,
+          "bachelors_degree_or_higher_moe": 25,
+          "civilian_population_18_over": 1000,
+          "civilian_veterans": 100
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "high_school_graduate_or_higher",
+          "high_school_graduate_or_higher_moe",
+          "bachelors_degree_or_higher",
+          "bachelors_degree_or_higher_moe",
+          "civilian_population_18_over",
+          "civilian_veterans"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b19001": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 36,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_households",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_less_10k",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_10k_to_14999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_15k_to_19999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_20k_to_24999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_25k_to_29999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_30k_to_34999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_35k_to_39999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_40k_to_44999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_45k_to_49999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_50k_to_59999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_60k_to_74999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_75k_to_99999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_100k_to_124999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_125k_to_149999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_150k_to_199999",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_200k_or_more",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_households_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_less_10k_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_10k_to_14999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_15k_to_19999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_20k_to_24999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_25k_to_29999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_30k_to_34999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_35k_to_39999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_40k_to_44999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_45k_to_49999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_50k_to_59999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_60k_to_74999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_75k_to_99999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_100k_to_124999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_125k_to_149999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_150k_to_199999_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "hh_income_200k_or_more_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "total_households": 500,
+          "hh_income_less_10k": 20,
+          "hh_income_10k_to_14999": 30,
+          "hh_income_15k_to_19999": 25,
+          "hh_income_20k_to_24999": 40,
+          "hh_income_25k_to_29999": 50,
+          "hh_income_30k_to_34999": 60,
+          "hh_income_35k_to_39999": 40,
+          "hh_income_40k_to_44999": 30,
+          "hh_income_45k_to_49999": 25,
+          "hh_income_50k_to_59999": 70,
+          "hh_income_60k_to_74999": 60,
+          "hh_income_75k_to_99999": 45,
+          "hh_income_100k_to_124999": 50,
+          "hh_income_125k_to_149999": 30,
+          "hh_income_150k_to_199999": 20,
+          "hh_income_200k_or_more": 15,
+          "total_households_moe": 5,
+          "hh_income_less_10k_moe": 2,
+          "hh_income_10k_to_14999_moe": 3,
+          "hh_income_15k_to_19999_moe": 2,
+          "hh_income_20k_to_24999_moe": 4,
+          "hh_income_25k_to_29999_moe": 5,
+          "hh_income_30k_to_34999_moe": 6,
+          "hh_income_35k_to_39999_moe": 4,
+          "hh_income_40k_to_44999_moe": 3,
+          "hh_income_45k_to_49999_moe": 3,
+          "hh_income_50k_to_59999_moe": 7,
+          "hh_income_60k_to_74999_moe": 6,
+          "hh_income_75k_to_99999_moe": 4,
+          "hh_income_100k_to_124999_moe": 5,
+          "hh_income_125k_to_149999_moe": 3,
+          "hh_income_150k_to_199999_moe": 2,
+          "hh_income_200k_or_more_moe": 2
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "total_households",
+          "hh_income_less_10k",
+          "hh_income_10k_to_14999",
+          "hh_income_15k_to_19999",
+          "hh_income_20k_to_24999",
+          "hh_income_25k_to_29999",
+          "hh_income_30k_to_34999",
+          "hh_income_35k_to_39999",
+          "hh_income_40k_to_44999",
+          "hh_income_45k_to_49999",
+          "hh_income_50k_to_59999",
+          "hh_income_60k_to_74999",
+          "hh_income_75k_to_99999",
+          "hh_income_100k_to_124999",
+          "hh_income_125k_to_149999",
+          "hh_income_150k_to_199999",
+          "hh_income_200k_or_more",
+          "total_households_moe",
+          "hh_income_less_10k_moe",
+          "hh_income_10k_to_14999_moe",
+          "hh_income_15k_to_19999_moe",
+          "hh_income_20k_to_24999_moe",
+          "hh_income_25k_to_29999_moe",
+          "hh_income_30k_to_34999_moe",
+          "hh_income_35k_to_39999_moe",
+          "hh_income_40k_to_44999_moe",
+          "hh_income_45k_to_49999_moe",
+          "hh_income_50k_to_59999_moe",
+          "hh_income_60k_to_74999_moe",
+          "hh_income_75k_to_99999_moe",
+          "hh_income_100k_to_124999_moe",
+          "hh_income_125k_to_149999_moe",
+          "hh_income_150k_to_199999_moe",
+          "hh_income_200k_or_more_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b23025": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 16,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population_16_over",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "labor_force",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "civilian_labor_force",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "employed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "unemployed",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "armed_forces",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "not_in_labor_force",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population_16_over_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "labor_force_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "civilian_labor_force_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "employed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "unemployed_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "armed_forces_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "not_in_labor_force_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "total_population_16_over": 800,
+          "labor_force": 500,
+          "civilian_labor_force": 480,
+          "employed": 450,
+          "unemployed": 30,
+          "armed_forces": 20,
+          "not_in_labor_force": 300,
+          "total_population_16_over_moe": 15,
+          "labor_force_moe": 10,
+          "civilian_labor_force_moe": 9,
+          "employed_moe": 8,
+          "unemployed_moe": 3,
+          "armed_forces_moe": 2,
+          "not_in_labor_force_moe": 9
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "total_population_16_over",
+          "labor_force",
+          "civilian_labor_force",
+          "employed",
+          "unemployed",
+          "armed_forces",
+          "not_in_labor_force",
+          "total_population_16_over_moe",
+          "labor_force_moe",
+          "civilian_labor_force_moe",
+          "employed_moe",
+          "unemployed_moe",
+          "armed_forces_moe",
+          "not_in_labor_force_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b14002": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 14,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_enrolled",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_not_enrolled",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_enrolled",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_not_enrolled",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_enrolled_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_not_enrolled_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_enrolled_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_not_enrolled_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "male_total": 600,
+          "male_enrolled": 400,
+          "male_not_enrolled": 200,
+          "female_total": 700,
+          "female_enrolled": 500,
+          "female_not_enrolled": 200,
+          "male_total_moe": 10,
+          "male_enrolled_moe": 8,
+          "male_not_enrolled_moe": 5,
+          "female_total_moe": 12,
+          "female_enrolled_moe": 9,
+          "female_not_enrolled_moe": 6
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "male_total",
+          "male_enrolled",
+          "male_not_enrolled",
+          "female_total",
+          "female_enrolled",
+          "female_not_enrolled",
+          "male_total_moe",
+          "male_enrolled_moe",
+          "male_not_enrolled_moe",
+          "female_total_moe",
+          "female_enrolled_moe",
+          "female_not_enrolled_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b14001": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 22,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population_3plus",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "enrolled_in_school",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "nursery_preschool",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "kindergarten",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "grade_1_to_4",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "grade_5_to_8",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "grade_9_to_12",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "college_undergraduate",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "graduate_professional",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "not_enrolled",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population_3plus_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "enrolled_in_school_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "nursery_preschool_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "kindergarten_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "grade_1_to_4_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "grade_5_to_8_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "grade_9_to_12_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "college_undergraduate_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "graduate_professional_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "not_enrolled_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "total_population_3plus": 1500,
+          "enrolled_in_school": 1000,
+          "nursery_preschool": 50,
+          "kindergarten": 100,
+          "grade_1_to_4": 200,
+          "grade_5_to_8": 150,
+          "grade_9_to_12": 120,
+          "college_undergraduate": 200,
+          "graduate_professional": 80,
+          "not_enrolled": 500,
+          "total_population_3plus_moe": 20,
+          "enrolled_in_school_moe": 15,
+          "nursery_preschool_moe": 5,
+          "kindergarten_moe": 6,
+          "grade_1_to_4_moe": 10,
+          "grade_5_to_8_moe": 8,
+          "grade_9_to_12_moe": 7,
+          "college_undergraduate_moe": 9,
+          "graduate_professional_moe": 4,
+          "not_enrolled_moe": 12
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "total_population_3plus",
+          "enrolled_in_school",
+          "nursery_preschool",
+          "kindergarten",
+          "grade_1_to_4",
+          "grade_5_to_8",
+          "grade_9_to_12",
+          "college_undergraduate",
+          "graduate_professional",
+          "not_enrolled",
+          "total_population_3plus_moe",
+          "enrolled_in_school_moe",
+          "nursery_preschool_moe",
+          "kindergarten_moe",
+          "grade_1_to_4_moe",
+          "grade_5_to_8_moe",
+          "grade_9_to_12_moe",
+          "college_undergraduate_moe",
+          "graduate_professional_moe",
+          "not_enrolled_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b20005": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 30,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_full_time_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_full_time_no_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_full_time_with_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_other_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_other_no_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_other_with_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_full_time_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_full_time_no_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_full_time_with_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_other_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_other_no_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_other_with_earnings",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_full_time_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_full_time_no_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_full_time_with_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_other_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_other_no_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_other_with_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_full_time_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_full_time_no_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_full_time_with_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_other_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_other_no_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_other_with_earnings_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "male_total": 500,
+          "male_full_time_total": 300,
+          "male_full_time_no_earnings": 20,
+          "male_full_time_with_earnings": 280,
+          "male_other_total": 200,
+          "male_other_no_earnings": 50,
+          "male_other_with_earnings": 150,
+          "female_total": 550,
+          "female_full_time_total": 350,
+          "female_full_time_no_earnings": 25,
+          "female_full_time_with_earnings": 325,
+          "female_other_total": 200,
+          "female_other_no_earnings": 60,
+          "female_other_with_earnings": 140,
+          "male_total_moe": 12,
+          "male_full_time_total_moe": 8,
+          "male_full_time_no_earnings_moe": 2,
+          "male_full_time_with_earnings_moe": 9,
+          "male_other_total_moe": 6,
+          "male_other_no_earnings_moe": 2,
+          "male_other_with_earnings_moe": 5,
+          "female_total_moe": 14,
+          "female_full_time_total_moe": 9,
+          "female_full_time_no_earnings_moe": 3,
+          "female_full_time_with_earnings_moe": 10,
+          "female_other_total_moe": 7,
+          "female_other_no_earnings_moe": 3,
+          "female_other_with_earnings_moe": 5
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "male_total",
+          "male_full_time_total",
+          "male_full_time_no_earnings",
+          "male_full_time_with_earnings",
+          "male_other_total",
+          "male_other_no_earnings",
+          "male_other_with_earnings",
+          "female_total",
+          "female_full_time_total",
+          "female_full_time_no_earnings",
+          "female_full_time_with_earnings",
+          "female_other_total",
+          "female_other_no_earnings",
+          "female_other_with_earnings",
+          "male_total_moe",
+          "male_full_time_total_moe",
+          "male_full_time_no_earnings_moe",
+          "male_full_time_with_earnings_moe",
+          "male_other_total_moe",
+          "male_other_no_earnings_moe",
+          "male_other_with_earnings_moe",
+          "female_total_moe",
+          "female_full_time_total_moe",
+          "female_full_time_no_earnings_moe",
+          "female_full_time_with_earnings_moe",
+          "female_other_total_moe",
+          "female_other_no_earnings_moe",
+          "female_other_with_earnings_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b24010": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 26,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_management_business_science_arts",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_service",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_sales_office",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_natural_resources_construction_maintenance",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_production_transportation_material_moving",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_total",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_management_business_science_arts",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_service",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_sales_office",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_natural_resources_construction_maintenance",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_production_transportation_material_moving",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_management_business_science_arts_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_service_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_sales_office_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_natural_resources_construction_maintenance_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "male_production_transportation_material_moving_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_total_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_management_business_science_arts_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_service_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_sales_office_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_natural_resources_construction_maintenance_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "female_production_transportation_material_moving_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "male_total": 400,
+          "male_management_business_science_arts": 100,
+          "male_service": 80,
+          "male_sales_office": 90,
+          "male_natural_resources_construction_maintenance": 70,
+          "male_production_transportation_material_moving": 60,
+          "female_total": 500,
+          "female_management_business_science_arts": 150,
+          "female_service": 100,
+          "female_sales_office": 120,
+          "female_natural_resources_construction_maintenance": 70,
+          "female_production_transportation_material_moving": 60,
+          "male_total_moe": 10,
+          "male_management_business_science_arts_moe": 5,
+          "male_service_moe": 4,
+          "male_sales_office_moe": 4,
+          "male_natural_resources_construction_maintenance_moe": 3,
+          "male_production_transportation_material_moving_moe": 3,
+          "female_total_moe": 12,
+          "female_management_business_science_arts_moe": 6,
+          "female_service_moe": 5,
+          "female_sales_office_moe": 5,
+          "female_natural_resources_construction_maintenance_moe": 4,
+          "female_production_transportation_material_moving_moe": 4
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "male_total",
+          "male_management_business_science_arts",
+          "male_service",
+          "male_sales_office",
+          "male_natural_resources_construction_maintenance",
+          "male_production_transportation_material_moving",
+          "female_total",
+          "female_management_business_science_arts",
+          "female_service",
+          "female_sales_office",
+          "female_natural_resources_construction_maintenance",
+          "female_production_transportation_material_moving",
+          "male_total_moe",
+          "male_management_business_science_arts_moe",
+          "male_service_moe",
+          "male_sales_office_moe",
+          "male_natural_resources_construction_maintenance_moe",
+          "male_production_transportation_material_moving_moe",
+          "female_total_moe",
+          "female_management_business_science_arts_moe",
+          "female_service_moe",
+          "female_sales_office_moe",
+          "female_natural_resources_construction_maintenance_moe",
+          "female_production_transportation_material_moving_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b02001": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 18,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "white_alone",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "black_or_african_american_alone",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "american_indian_alaska_native_alone",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "asian_alone",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "native_hawaiian_pacific_islander_alone",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_other_race_alone",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "two_or_more_races",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "white_alone_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "black_or_african_american_alone_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "american_indian_alaska_native_alone_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "asian_alone_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "native_hawaiian_pacific_islander_alone_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_other_race_alone_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "two_or_more_races_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "total_population": 1000,
+          "white_alone": 600,
+          "black_or_african_american_alone": 200,
+          "american_indian_alaska_native_alone": 30,
+          "asian_alone": 100,
+          "native_hawaiian_pacific_islander_alone": 10,
+          "some_other_race_alone": 40,
+          "two_or_more_races": 20,
+          "total_population_moe": 15,
+          "white_alone_moe": 10,
+          "black_or_african_american_alone_moe": 8,
+          "american_indian_alaska_native_alone_moe": 3,
+          "asian_alone_moe": 5,
+          "native_hawaiian_pacific_islander_alone_moe": 2,
+          "some_other_race_alone_moe": 4,
+          "two_or_more_races_moe": 3
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "total_population",
+          "white_alone",
+          "black_or_african_american_alone",
+          "american_indian_alaska_native_alone",
+          "asian_alone",
+          "native_hawaiian_pacific_islander_alone",
+          "some_other_race_alone",
+          "two_or_more_races",
+          "total_population_moe",
+          "white_alone_moe",
+          "black_or_african_american_alone_moe",
+          "american_indian_alaska_native_alone_moe",
+          "asian_alone_moe",
+          "native_hawaiian_pacific_islander_alone_moe",
+          "some_other_race_alone_moe",
+          "two_or_more_races_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b19013": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 4,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "median_household_income",
+          "data_type": "double precision",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "median_household_income_moe",
+          "data_type": "double precision",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "median_household_income": 55000.0,
+          "median_household_income_moe": 1500.0
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "median_household_income",
+          "median_household_income_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    },
+    "b15003": {
+      "exists": true,
+      "row_count": 1,
+      "column_count": 21,
+      "columns": [
+        {
+          "column_name": "geography_id",
+          "data_type": "character varying",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "year",
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "total_population_25_over",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_diploma",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "ged_or_equivalent",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_less_than_1_year",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_no_degree",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "associates_degree",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_degree",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "masters_degree",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "professional_school_degree",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "doctorate_degree",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "high_school_diploma_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "ged_or_equivalent_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_less_than_1_year_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "some_college_no_degree_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "associates_degree_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "bachelors_degree_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "masters_degree_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "professional_school_degree_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        },
+        {
+          "column_name": "doctorate_degree_moe",
+          "data_type": "integer",
+          "is_nullable": "YES",
+          "column_default": null,
+          "character_maximum_length": null
+        }
+      ],
+      "sample_data": [
+        {
+          "geography_id": "04000US48",
+          "year": 2022,
+          "total_population_25_over": 1000,
+          "high_school_diploma": 300,
+          "ged_or_equivalent": 50,
+          "some_college_less_than_1_year": 70,
+          "some_college_no_degree": 150,
+          "associates_degree": 80,
+          "bachelors_degree": 200,
+          "masters_degree": 90,
+          "professional_school_degree": 30,
+          "doctorate_degree": 30,
+          "high_school_diploma_moe": 10,
+          "ged_or_equivalent_moe": 5,
+          "some_college_less_than_1_year_moe": 7,
+          "some_college_no_degree_moe": 8,
+          "associates_degree_moe": 6,
+          "bachelors_degree_moe": 9,
+          "masters_degree_moe": 6,
+          "professional_school_degree_moe": 3,
+          "doctorate_degree_moe": 2
+        }
+      ],
+      "schema_comparison": {
+        "missing_in_db": [],
+        "missing_in_schema": [
+          "geography_id",
+          "year",
+          "total_population_25_over",
+          "high_school_diploma",
+          "ged_or_equivalent",
+          "some_college_less_than_1_year",
+          "some_college_no_degree",
+          "associates_degree",
+          "bachelors_degree",
+          "masters_degree",
+          "professional_school_degree",
+          "doctorate_degree",
+          "high_school_diploma_moe",
+          "ged_or_equivalent_moe",
+          "some_college_less_than_1_year_moe",
+          "some_college_no_degree_moe",
+          "associates_degree_moe",
+          "bachelors_degree_moe",
+          "masters_degree_moe",
+          "professional_school_degree_moe",
+          "doctorate_degree_moe"
+        ],
+        "type_mismatches": [],
+        "matches": []
+      },
+      "json_schema": {},
+      "schema_match": true
+    }
+  },
+  "summary": {
+    "total_tables": 13,
+    "expected_tables_found": 12,
+    "schema_matches": 12,
+    "schema_mismatches": 0,
+    "missing_tables_count": 0
+  }
+}

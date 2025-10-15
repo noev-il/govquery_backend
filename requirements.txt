@@ -17,3 +17,6 @@ requests>=2.31.0
 
 # SQL parsing and validation
 sqlglot>=24.0.0
+
+# Database dependencies
+asyncpg>=0.29.0

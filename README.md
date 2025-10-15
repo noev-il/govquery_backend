@@ -5,11 +5,14 @@ A backend service for converting natural language queries to SQL for government 
 ## Features
 
 - **Modal Integration**: Connect to your Modal-hosted NL2SQL models
+- **PostgreSQL Database**: Census data storage with 12 tables and sample data
+- **SQL Execution**: Direct SQL query execution with safety checks
 - **Schema Management**: Automatic loading and management of ACS (American Community Survey) schemas
-- **REST API**: FastAPI-based endpoints for NL2SQL conversion
+- **REST API**: FastAPI-based endpoints for NL2SQL conversion and SQL execution
 - **Flexible Querying**: Support for specific table targeting or full schema context
 - **Smart Auto-Deployment**: Automatic Modal app deployment with cold start fallback
 - **Auto-Stop**: Built-in timeout mechanism for cost efficiency
+- **Security**: SELECT-only enforcement, row limits, and query timeouts
 
 ## Project Structure
 
@@ -75,7 +78,30 @@ MODAL_APP_NAME=your-actual-modal-app-name
 MODAL_FUNCTION_NAME=nl2sql_inference
 ```
 
-### 3. Modal Authentication
+### 3. Setup PostgreSQL Database
+
+The system includes a PostgreSQL database with Census data:
+
+```bash
+# Start PostgreSQL container
+docker-compose up -d
+
+# Verify database setup
+python test_database.py
+
+# Validate schema
+python database/validate_schema.py
+```
+
+**Database Features:**
+- 12 Census tables with sample data
+- Docker containerized PostgreSQL 15
+- Security: SELECT-only enforcement, row limits, timeouts
+- Connection pooling for performance
+
+For detailed database setup instructions, see [DATABASE_SETUP.md](DATABASE_SETUP.md).
+
+### 4. Modal Authentication
 
 Set up Modal authentication:
 
@@ -120,6 +146,8 @@ The basic API will be available at `http://localhost:8000` (requires manual Moda
 - `GET /schema/{table_code}` - Get specific schema
 - `POST /query` - Convert natural language to SQL (async)
 - `POST /query/sync` - Convert natural language to SQL (sync)
+- `POST /execute` - Execute SQL query against Census database
+- `POST /parse-sql` - Parse and validate SQL query
 
 ### Example API Usage
 
@@ -138,6 +166,14 @@ curl -X POST "http://localhost:8000/query" \
        "table_codes": ["B01001"],
        "max_tokens": 512,
        "temperature": 0.1
+     }'
+
+# Execute SQL query
+curl -X POST "http://localhost:8000/execute" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "sql": "SELECT * FROM b01001 LIMIT 5",
+       "max_rows": 1000
      }'
 ```
 
